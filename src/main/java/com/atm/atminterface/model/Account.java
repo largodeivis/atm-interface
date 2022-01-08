@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -21,7 +20,7 @@ public class Account {
         this.customer = customer;
         this.name = name;
         this.pin = pin;
-        this.balance = balance;
+        this.balance = balance.setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override

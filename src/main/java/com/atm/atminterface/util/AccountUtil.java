@@ -1,13 +1,12 @@
 package com.atm.atminterface.util;
 
-import com.atm.atminterface.service.LoginService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class AccountUtil {
-    public static final Logger logger = LoggerFactory.getLogger(AccountUtil.class);
 
     public static Boolean validatePin(String strPin){
+        /**
+         * Returns true if PIN is a positive digit.
+         */
+
         if (strPin == null){
             return false;
         }
@@ -19,6 +18,10 @@ public class AccountUtil {
     }
 
     public static Boolean verifyPin(String strPin, String verifyPin){
+        /**
+         * Returns true if both PINS match.
+         */
+
         if(strPin.equals(verifyPin)){
             return true;
         }
@@ -26,13 +29,19 @@ public class AccountUtil {
     }
 
     public static Boolean validateBalance(String balance){
+        /**
+         * Returns true if balance is a positive float value. Also accepts positive integers.
+         */
+
         if (balance == null){
             return false;
         }
 
-        if (balance.matches("\\d+")){
+        if (balance.matches("\\d+(\\.\\d+)?")){
             return true;
         }
         return false;
     }
+
+    //validate userid to not be null or empty
 }
