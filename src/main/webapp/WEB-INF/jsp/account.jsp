@@ -4,5 +4,6 @@
 </head>
 <body>
 Welcome to your ATM Account ${userid}.
+Current Balance: $ ${balance}
 </body>
 </html>

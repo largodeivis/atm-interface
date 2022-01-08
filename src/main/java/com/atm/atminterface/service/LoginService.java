@@ -17,6 +17,6 @@ public class LoginService {
             return false;
         }
         //pin should be between 4 and 6 numbers
-        return userid.equalsIgnoreCase("sss") && pin == 1234;
+        return userid.equalsIgnoreCase("user1") && pin == 1234;
     }
 }
