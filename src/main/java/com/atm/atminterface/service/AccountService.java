@@ -9,17 +9,23 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class AccountService {
 
     public static final Logger logger = LoggerFactory.getLogger(LoginService.class);
     public static List<Account> accounts = new ArrayList<>();
+    public static int accountCount = 3;
 
     static {
-        accounts.add(new Account(1, "user1", new BigDecimal("100.00")));
-        accounts.add(new Account(1, "user2", new BigDecimal("232.10")));
-        accounts.add(new Account(1, "user3", new BigDecimal("7.15")));
+        accounts.add(new Account(1, "user1", "Jay Z","1234", new BigDecimal("100.00")));
+        accounts.add(new Account(2, "user2", "Luffy", "9876", new BigDecimal("232.10")));
+        accounts.add(new Account(3, "user3", "Daniel LaRusso","7777" ,new BigDecimal("7.15")));
+    }
+
+    public void createAccount(String customer, String name, String pin, String balance){
+        accounts.add(new Account(++accountCount, customer, name, pin, new BigDecimal(balance)));
     }
 
     public BigDecimal retrieveBalance(String user){
@@ -60,5 +66,7 @@ public class AccountService {
         return new BigDecimal("0.00"); //change this to error
     }
 
-
+    public List<Account> getAccounts() {
+        return accounts;
+    }
 }
