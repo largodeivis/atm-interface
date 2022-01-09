@@ -32,9 +32,9 @@ public class AccountService {
         accounts.add(new Account(++accountCount, customer, name, pin, balance));
     }
 
-    public BigDecimal retrieveBalance(String user){
+    public BigDecimal retrieveBalance(String userid){
         for(Account account : accounts){
-            if (account.getCustomer().equalsIgnoreCase(user)){
+            if (account.getCustomer().equalsIgnoreCase(userid)){
                 return account.getBalance();
             }
         }
@@ -42,24 +42,36 @@ public class AccountService {
         return new BigDecimal("0.00"); //Change this to error
     }
 
-    public BigDecimal depositMoney(String user, BigDecimal amount){
+    public BigDecimal depositMoney(String userid, BigDecimal amount){
         for(Account account : accounts){
-            if (account.getCustomer().equalsIgnoreCase(user)){
+            if (account.getCustomer().equalsIgnoreCase(userid)){
                 return account.getBalance().add(amount);
             }
         }
         return new BigDecimal("0.00"); //change this to error
     }
 
-    public BigDecimal withdrawMoney(String user, BigDecimal amount) throws InsufficientBalanceException {
+    public BigDecimal depositMoney(String userid, String amount){
+        for(Account account : accounts){
+            if (account.getCustomer().equalsIgnoreCase(userid)){
+                BigDecimal newBalance = account.getBalance().add(new BigDecimal(amount));
+                account.setBalance(newBalance);
+                return newBalance;
+            }
+        }
+        return new BigDecimal("0.00"); //change this to error
+    }
+
+    public BigDecimal withdrawMoney(String user, String amount) throws InsufficientBalanceException {
         for(Account account : accounts){
             if (account.getCustomer().equalsIgnoreCase(user)){
                 BigDecimal balance = account.getBalance();
                 if (balance.compareTo(BigDecimal.ZERO) > 0) {
-                    BigDecimal finalMoneyAmount = balance.subtract(amount);
+                    BigDecimal finalMoneyAmount = balance.subtract(new BigDecimal(amount));
                     if (finalMoneyAmount.compareTo(BigDecimal.ZERO) < 0) {
                         throw new InsufficientBalanceException(balance, amount);
                     }
+                    account.setBalance(finalMoneyAmount);
                     return finalMoneyAmount;
                 } else {
                     throw new InsufficientBalanceException(balance, amount);
@@ -72,5 +84,14 @@ public class AccountService {
 
     public List<Account> getAccounts() {
         return accounts;
+    }
+
+    public Account getAccount(String userid){
+        for(Account account : accounts){
+            if (account.getCustomer().equalsIgnoreCase(userid)){
+                return account;
+            }
+        }
+        return null;
     }
 }

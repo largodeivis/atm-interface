@@ -6,8 +6,6 @@
 	rel="stylesheet">
 </head>
 <body>
-<font color="red">${ErrorMessage}</font><br>
-
 <div class="container">
     <caption>Create new ATM Account here:</caption>
     <form:form method="post" modelAttribute="account">

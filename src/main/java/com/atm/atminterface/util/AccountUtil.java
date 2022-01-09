@@ -35,7 +35,7 @@ public class AccountUtil {
          * Returns true if balance is a positive float value. Also accepts positive integers.
          */
 
-        if (balance == null){
+        if (balance == null || balance.isBlank()){
             return false;
         }
 
