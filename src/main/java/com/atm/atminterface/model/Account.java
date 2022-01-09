@@ -15,6 +15,10 @@ public class Account {
     private String pin;
     private BigDecimal balance;
 
+    public Account(){
+        super();
+    };
+
     public Account(int id, String customer, String name, String pin, BigDecimal balance) {
         this.id = id;
         this.customer = customer;
@@ -22,6 +26,7 @@ public class Account {
         this.pin = pin;
         this.balance = balance.setScale(2, RoundingMode.HALF_UP);
     }
+
 
     @Override
     public String toString() {

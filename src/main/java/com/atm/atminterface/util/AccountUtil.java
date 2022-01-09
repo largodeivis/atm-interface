@@ -1,5 +1,7 @@
 package com.atm.atminterface.util;
 
+import java.math.BigDecimal;
+
 public class AccountUtil {
 
     public static Boolean validatePin(String strPin){
@@ -38,6 +40,21 @@ public class AccountUtil {
         }
 
         if (balance.matches("\\d+(\\.\\d+)?")){
+            return true;
+        }
+        return false;
+    }
+
+    public static Boolean validateBalance(BigDecimal balance){
+        /**
+         * Returns true if balance >= 0.
+         */
+
+        if (balance == null){
+            return false;
+        }
+
+        if (balance.compareTo(BigDecimal.ZERO) >= 0){
             return true;
         }
         return false;

@@ -30,28 +30,30 @@ public class AccountController {
 
     @GetMapping("/create-account")
     public String showCreateAccountPage(ModelMap model){
+        model.addAttribute("account", new Account(0, "", "", "", new BigDecimal("0.00")));
         return "create-account";
     }
 
     @PostMapping("/create-account")
-    public String createAccount(ModelMap model, @RequestParam String userid, @RequestParam String name,
-                                @RequestParam String strPin, @RequestParam String verifyPin, @RequestParam String balance){
-        if(!AccountUtil.validatePin(strPin)){
+    public String createAccount(ModelMap model, Account account, @RequestParam String verifyPin){
+
+        if(!AccountUtil.validatePin(account.getPin())){
             model.put("ErrorMessage", "Invalid PIN. PIN must be numerical.");
             return "create-account";
         }
 
-        if(!AccountUtil.verifyPin(strPin, verifyPin)){
+        if(!AccountUtil.verifyPin(account.getPin(), verifyPin)){
             model.put("ErrorMessage", "Error: PINs must match.");
             return "create-account";
         }
 
-        if(!AccountUtil.validateBalance(balance)){
+        if(!AccountUtil.validateBalance(account.getBalance())){
             model.put("ErrorMessage", "Invalid Balance. Balance must be a positive number.");
             return "create-account";
         }
 
-        service.createAccount(userid, name, strPin, balance);
+        service.createAccount(account.getCustomer(), account.getName(), account.getPin(), account.getBalance());
+        model.put("userid", account.getCustomer());
 
         return "redirect:/account";
     }

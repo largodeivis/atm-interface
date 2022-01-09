@@ -28,6 +28,10 @@ public class AccountService {
         accounts.add(new Account(++accountCount, customer, name, pin, new BigDecimal(balance)));
     }
 
+    public void createAccount(String customer, String name, String pin, BigDecimal balance){
+        accounts.add(new Account(++accountCount, customer, name, pin, balance));
+    }
+
     public BigDecimal retrieveBalance(String user){
         for(Account account : accounts){
             if (account.getCustomer().equalsIgnoreCase(user)){
