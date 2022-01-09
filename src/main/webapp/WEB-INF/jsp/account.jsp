@@ -16,7 +16,7 @@
     Current Balance: $ ${balance}
     </div>
 
-    <form method="post" >
+    <form >
         <div>
         <input id="amount" name="amount" type="text" required="required"/>
         <a type="button" class="btn btn-success" onclick="this.href='/deposit?customer=${userid}&amount='+document.getElementById('amount').value">Deposit</a>
