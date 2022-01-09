@@ -6,11 +6,13 @@ import com.atm.atminterface.util.AccountUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @Controller
@@ -35,20 +37,8 @@ public class AccountController {
     }
 
     @PostMapping("/create-account")
-    public String createAccount(ModelMap model, Account account, @RequestParam String verifyPin){
-
-        if(!AccountUtil.validatePin(account.getPin())){
-            model.put("ErrorMessage", "Invalid PIN. PIN must be numerical.");
-            return "create-account";
-        }
-
-        if(!AccountUtil.verifyPin(account.getPin(), verifyPin)){
-            model.put("ErrorMessage", "Error: PINs must match.");
-            return "create-account";
-        }
-
-        if(!AccountUtil.validateBalance(account.getBalance())){
-            model.put("ErrorMessage", "Invalid Balance. Balance must be a positive number.");
+    public String createAccount(ModelMap model, @Valid Account account, BindingResult result){
+        if (result.hasErrors()){
             return "create-account";
         }
 
