@@ -7,6 +7,18 @@
 </head>
 <body>
 <font color="red">${ErrorMessage}</font><br>
+<nav role="navigation" class="navbar navbar-default">
+	<div class="">
+		<a href="/account" class="navbar-brand">ATM Interface</a>
+	</div>
+	<div class="navbar-collapse">
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="/login">Home</a></li>
+			<li><a href="/account">Account</a></li>
+
+		</ul>
+	</div>
+</nav>
 <div class="container">
     <div>
     <caption>Welcome to your ATM Account ${userid}.</caption>
@@ -27,9 +39,6 @@
 <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script>
-function getTextBoxValue() {
-  return document.getElementById("amount").value
-}
 </script>
 </body>
 </html>
