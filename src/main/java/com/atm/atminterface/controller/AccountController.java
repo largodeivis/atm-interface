@@ -60,21 +60,6 @@ public class AccountController {
         return "account";
     }
 
-//    @GetMapping("/deposit")
-//    public String showDepositPage(ModelMap model, @RequestParam String userid){
-//        Account account = service.getAccount(userid);
-//        model.put("account", account);
-//        return "deposit";
-//    }
-
-//    @PostMapping("/deposit")
-//    public String depositMoneyIntoAccount(ModelMap model, @Valid Account account, BindingResult result){
-//        if (result.hasErrors()){
-//            return "deposit";
-//        }
-//        service.depositMoney(account.getCustomer(), account.getBalance());
-//        return "redirect:/account";
-//    }
     @GetMapping("/deposit")
     public String depositMoneyIntoAccount(ModelMap model, @RequestParam String customer, @RequestParam String amount){
         if(!AccountUtil.validateBalance(amount)){
